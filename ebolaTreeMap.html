@@ -50,7 +50,7 @@ body {
 </style>
   <!-- <h1>Ebola Treemap</h1> -->
 </head>
-<body onload="document.getElementById('mode1').click();">
+<body onload="renderd3('ebolaConfirmedSaves.csv');">
   <svg width="960" height="570"></svg>
   <form>
     <p align="left">
@@ -92,6 +92,8 @@ var treemap = d3.treemap()
     .round(true);
 var sbc = true, sbp = false, sbs = false, sba = true, sbd = false ;
 
+  var svg =   d3.select("body");
+
 function setCsvFile(file){
   var fnb = "ebolaOpt1Opt2Opt3Out.csv";
   if("SUMBYCONFIRMED"==file.value.toUpperCase()) sbc = !sbc;
@@ -107,10 +109,11 @@ function setCsvFile(file){
   fnb = fnb.replace("Opt1", "");
   fnb = fnb.replace("Opt2", "");
   fnb = fnb.replace("Opt3", "");
-  renderd3(fnb);
+  updated3(fnb);
 }
 
 function renderd3(csvFile){
+
 d3.csv(csvFile, type, function(error, data) {
   if (error) throw error;
 
@@ -120,17 +123,17 @@ d3.csv(csvFile, type, function(error, data) {
 
   treemap(root);
 
-  d3.select("body")
-    .selectAll(".node")
-    .data(root.leaves())
-    .enter().append("div")
-      .attr("class", "node")
-      .attr("title", function(d) { return d.id + "\n" + format(d.value); })
-      .style("left", function(d) { return d.x0 + "px"; })
-      .style("top", function(d) { return d.y0 + "px"; })
-      .style("width", function(d) { return d.x1 - d.x0 + "px"; })
-      .style("height", function(d) { return d.y1 - d.y0 + "px"; })
-      .style("background", function(d) { while (d.depth > 1) d = d.parent; return color(d.id); })
+  svg.selectAll(".node")
+      .data(root.leaves())
+      .enter()
+      .append("div")
+    .attr("class", "node")
+    .attr("title", function(d) { return d.id + "\n" + format(d.value); })
+    .style("left", function(d) { return d.x0 + "px"; })
+    .style("top", function(d) { return d.y0 + "px"; })
+    .style("width", function(d) { return d.x1 - d.x0 + "px"; })
+    .style("height", function(d) { return d.y1 - d.y0 + "px"; })
+    .style("background", function(d) { while (d.depth > 1) d = d.parent; return color(d.id); })
     .append("div")
       .attr("class", "node-label")
       .text(function(d) { return d.id.substring(d.id.lastIndexOf(".") + 1).split("/(?=[A-Z][^A-Z])/g").join("\n"); })
@@ -138,6 +141,36 @@ d3.csv(csvFile, type, function(error, data) {
       .attr("class", "node-value")
       .text(function(d) { return format(d.value); });
 });
+}
+function updated3(csvFile) {
+  d3.csv(csvFile, type, function(error, data) {
+    if (error) throw error;
+
+    var root = stratify(data)
+        .sum(function(d) { return d.value; })
+        .sort(function(a, b) { return b.height - a.height || b.value - a.value; });
+
+    treemap(root);
+
+    var svg = d3.select("body").transition();
+      svg.selectAll(".node")
+      .data(root.leaves())
+      .enter().append("div")
+        .attr("class", "node")
+        .attr("title", function(d) { return d.id + "\n" + format(d.value); })
+        .style("left", function(d) { return d.x0 + "px"; })
+        .style("top", function(d) { return d.y0 + "px"; })
+        .style("width", function(d) { return d.x1 - d.x0 + "px"; })
+        .style("height", function(d) { return d.y1 - d.y0 + "px"; })
+        .style("background", function(d) { while (d.depth > 1) d = d.parent; return color(d.id); })
+      .append("div")
+        .attr("class", "node-label")
+        .text(function(d) { return d.id.substring(d.id.lastIndexOf(".") + 1).split("/(?=[A-Z][^A-Z])/g").join("\n"); })
+      .append("div")
+        .attr("class", "node-value")
+        .text(function(d) { return format(d.value); });
+  });
+  
 }
 function type(d) {
   d.value = +d.value;
