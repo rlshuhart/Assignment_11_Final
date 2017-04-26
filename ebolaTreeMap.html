@@ -50,7 +50,7 @@ body {
 </style>
   <!-- <h1>Ebola Treemap</h1> -->
 </head>
-<body onload="renderd3('ebolaConfirmedSaves.csv');">
+<!-- <body onload="renderd3('ebolaConfirmedSaves.csv');"> -->
   <svg width="960" height="570"></svg>
   <form>
     <p align="left">
@@ -67,16 +67,11 @@ body {
 <script src="d3.min.js"></script>
 <script>
 
-// TODO transition to SVG
+var svg = d3.select("svg"),
+    width = +svg.attr("width"),
+    height = +svg.attr("height");
 
-// var svg = d3.select("svg"),
-//     width = +svg.attr("width"),
-//     height = +svg.attr("height");
-
-var width = 720,
-    height = 550;
-
-var format = d3.format(",d");
+/*var format = d3.format(",d");*/
 
 var color = d3.scaleOrdinal()
     .range(d3.schemeCategory10
@@ -90,9 +85,9 @@ var treemap = d3.treemap()
     .size([width, height])
     .padding(1)
     .round(true);
-var sbc = true, sbp = false, sbs = false, sba = true, sbd = false ;
 
-  var svg =   d3.select("body");
+
+var sbc = true, sbp = false, sbs = false, sba = true, sbd = false ;
 
 function setCsvFile(file){
   var fnb = "ebolaOpt1Opt2Opt3Out.csv";
@@ -112,9 +107,8 @@ function setCsvFile(file){
   updated3(fnb);
 }
 
-function renderd3(csvFile){
 
-d3.csv(csvFile, type, function(error, data) {
+d3.csv('ebolaConfirmedSaves.csv', type, function(error, data) {
   if (error) throw error;
 
   var root = stratify(data)
@@ -123,25 +117,71 @@ d3.csv(csvFile, type, function(error, data) {
 
   treemap(root);
 
-  svg.selectAll(".node")
-      .data(root.leaves())
-      .enter()
-      .append("div")
-    .attr("class", "node")
-    .attr("title", function(d) { return d.id + "\n" + format(d.value); })
-    .style("left", function(d) { return d.x0 + "px"; })
-    .style("top", function(d) { return d.y0 + "px"; })
-    .style("width", function(d) { return d.x1 - d.x0 + "px"; })
-    .style("height", function(d) { return d.y1 - d.y0 + "px"; })
-    .style("background", function(d) { while (d.depth > 1) d = d.parent; return color(d.id); })
-    .append("div")
-      .attr("class", "node-label")
-      .text(function(d) { return d.id.substring(d.id.lastIndexOf(".") + 1).split("/(?=[A-Z][^A-Z])/g").join("\n"); })
-    .append("div")
-      .attr("class", "node-value")
-      .text(function(d) { return format(d.value); });
+  var cell = svg.selectAll("g")
+    .data(root.leaves())
+    .enter().append("g")
+    .attr("transform", function(d) { return "translate(" + d.x0 + "," + d.y0 + ")"; });
+
+    cell.append("rect")
+         .attr("id", function(d) { return d.data.id; })
+         .attr("width", function(d) { return d.x1 - d.x0; })
+         .attr("height", function(d) { return d.y1 - d.y0; })
+         .attr("fill", function(d) { return color(d.parent.data.id); });
+
+     cell.append("clipPath")
+         .attr("id", function(d) { return "clip-" + d.data.id; })
+       .append("use")
+         .attr("xlink:href", function(d) { return "#" + d.data.id; });
+
+     cell.append("text")
+         .attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
+       .selectAll("tspan")
+         .data(function(d) { return d.data.name.split(/(?=[A-Z][^A-Z])/g); })
+       .enter().append("tspan")
+         .attr("x", 4)
+         .attr("y", function(d, i) { return 13 + i * 10; })
+         .text(function(d) { return d; });
+
+     cell.append("title")
+         .text(function(d) { return d.data.id + "\n" + format(d.value); });
+
+     d3.selectAll("input")
+         .data([sumByConfirmed, sumByProbable,sumBySuspected], function(d) { return d ? d.name : this.value; })
+         .on("change", changed);
+
+     var timeout = d3.timeout(function() {
+         d3.select("input[value=\"sumByCount\"]")
+             .property("checked", true)
+             .dispatch("change");
+       }, 2000);
+
+       function changed(sum) {
+         timeout.stop();
+
+         treemap(root.sum(sum));
+
+         cell.transition()
+             .duration(750)
+             .attr("transform", function(d) { return "translate(" + d.x0 + "," + d.y0 + ")"; })
+           .select("rect")
+             .attr("width", function(d) { return d.x1 - d.x0; })
+             .attr("height", function(d) { return d.y1 - d.y0; });
+       }
+
 });
+
+function sumByConfirmed(d) {
+  return d.value;
 }
+
+function sumByProbable(d) {
+  return d.value;
+}
+
+function sumBySuspected(d) {
+  return d.value;
+}
+
 function updated3(csvFile) {
   d3.csv(csvFile, type, function(error, data) {
     if (error) throw error;
@@ -170,26 +210,12 @@ function updated3(csvFile) {
         .attr("class", "node-value")
         .text(function(d) { return format(d.value); });
   });
-  
+
 }
 function type(d) {
   d.value = +d.value;
   return d;
 }
-
-// WIP functions for organizing tree map
-function sumByConfirmed(d) {
-  return d.deaths;
-}
-
-function sumByProbable(d) {
-  return d.size;
-}
-
-function sumBySuspected(d) {
-  return d.size;
-}
-
 
 </script>
 
