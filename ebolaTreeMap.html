@@ -48,7 +48,7 @@ body {
 }
 
 </style>
-  <h1>Ebola Treemap</h1>
+  <!-- <h1>Ebola Treemap</h1> -->
   <svg width="960" height="570"></svg>
   <form>
     <label><input type="radio" name="mode" value="sumByConfirmed" checked>Confirmed</label>
@@ -60,6 +60,12 @@ body {
 
 <script src="d3.min.js"></script>
 <script>
+
+// TODO transition to SVG
+
+// var svg = d3.select("svg"),
+//     width = +svg.attr("width"),
+//     height = +svg.attr("height");
 
 var width = 720,
     height = 550;
@@ -74,6 +80,7 @@ var stratify = d3.stratify()
     .parentId(function(d) { return d.id.substring(0, d.id.lastIndexOf(".")); });
 
 var treemap = d3.treemap()
+    //.tile(d3.treemapResquarify)
     .size([width, height])
     .padding(1)
     .round(true);
