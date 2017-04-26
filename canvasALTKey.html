@@ -1,0 +1,89 @@
+<html><body>
+<div onmousemove="mouseXY(event)"><canvas id="canvas" width="900" height="750" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas></div><br><hr><h6>version 0.0.1</h6>
+<script>
+var outterRing = 10, innerRing = 40;
+var maxTextWidth = 0;
+var drawingState = 0;
+ var x;
+ var y;
+ var c = document.getElementById("canvas");
+ var ctx = c.getContext("2d");
+function init(){ window.requestAnimationFrame(draw); }
+function drawGraphTitle(txt){
+    ctx.font="12px Georgia";
+    ctx.strokeText(txt,canvas.width/2 - ctx.measureText(txt).width/2,12);
+}
+function drawWindowTitle(txt, windowNumber){
+    innerRing = canvas.width/2;
+    var wnx = 0, wny = 0, wnw = canvas.width, wnh = canvas.height;
+    if (maxTextWidth < ctx.measureText(txt).width+4) maxTextWidth = ctx.measureText(txt).width+4;
+    //ctx.fillStyle = "#FFFFFF"; 
+    //ctx.fillRect(20,1,canvas.width,16); 
+    switch (windowNumber){
+    case 1: ctx.fillStyle = "#00FF00"; wnx = 3;wny = 3;wnw = canvas.width - 6;wnh = (canvas.height/2) - 40; break;
+    case 2: ctx.fillStyle = "#FFFFFF"; wnx = 3;wny = (canvas.height/2)+40;wnw = canvas.width - 6;wnh = canvas.height - 43; break;
+    case 3: ctx.fillStyle = "#FF0000"; wnx = 3;wny = 3;wnw = (canvas.width/2) - 40;wnh = canvas.height - 6; break;
+    case 4: ctx.fillStyle = "#0000FF"; wnx = (canvas.width/2)+40;wny = 3;wnw = canvas.width - 40;wnh = canvas.height - 6; break;
+    default: ctx.fillStyle = "#AA5500"; 
+    }
+    ctx.fillRect(wnx,wny,wnw,wnh); 
+    ctx.font="11px Arial";
+    ctx.strokeText(txt,wnx+22,wny+17);
+}
+function drawing() {
+    var ret = drawingState ;
+    switch (drawingState){//for navigating to different windows
+    case 1: if ( y > canvas.height - innerRing ){ret = 0;} break;
+    case 2: if ( y < innerRing ){ret = 0;} break;
+    case 3: if ( x > canvas.width-innerRing ){ret = 0;} break;
+    case 4: if ( x < innerRing ){ret = 0;} break;
+    case 0:
+    if (x < outterRing && y < canvas.height - outterRing && y > outterRing) ret = 3;
+    if ( y < outterRing ) ret = 1;
+    if ( y > canvas.height - outterRing ) ret = 2;
+    if (x > canvas.width-outterRing && y < canvas.height - outterRing && y > outterRing) ret = 4; 
+    }
+    return drawingState = ret;
+}
+function draw() {
+    switch (drawing()){
+    case 1: drawHeaderWindow(); break;
+    case 2: drawFooterMarginWindow(); break;
+    case 3: drawLeftMarginWindow(); break;
+    case 4: drawRightMarginWindow(); break;
+    default: drawMainWindow();
+    }
+    window.requestAnimationFrame(draw);
+}
+function drawHeaderWindow() {
+    drawWindowTitle("Header Window",1);
+}
+function drawFooterMarginWindow() {
+    drawWindowTitle("Footer Window",2);
+}
+function drawLeftMarginWindow() {
+    drawWindowTitle("Left Margin Window",3);
+}
+function drawRightMarginWindow() {
+    drawWindowTitle("Right Margin Window",4);
+}
+function drawMainWindow() {
+    drawWindowTitle("Main Window",0);
+    drawGraphTitle("Scatter Plot");
+    ctx.beginPath();//The axis of a grid
+    ctx.moveTo(10, canvas.height-10);
+    ctx.lineTo(canvas.width-5, canvas.height-10);
+    ctx.lineTo(canvas.width-10, canvas.height-3);
+    ctx.lineTo(15, canvas.height-3);
+    ctx.lineTo(10, canvas.height-10);
+    ctx.lineTo(3, canvas.height-15);
+    ctx.lineTo(3, 10);
+    ctx.lineTo(10, 3);
+    ctx.lineTo(10, canvas.height-10);
+    ctx.stroke();
+}
+function mouseXY(e){x = e.clientX; y = e.clientY;}
+function isKeyPressed(event){if(event.altKey){alert("The ALT key was pressed!");}else{alert("The ALT key was NOT pressed!");}}
+init();
+</script></body></html>
