@@ -49,14 +49,20 @@ body {
 
 </style>
   <!-- <h1>Ebola Treemap</h1> -->
+</head>
+<body onload="document.getElementById('mode1').click();">
   <svg width="960" height="570"></svg>
   <form>
-    <label><input type="radio" name="mode" value="sumByConfirmed" checked>Confirmed</label>
-    <label><input type="radio" name="mode" value="sumByProbable">Probable</label>
-    <label><input type="radio" name="mode" value="sumBySuspected">Suspected</label>
+    <p align="left">
+    <label><input type="checkBox" name="mode1" id="mode1" value="sumByConfirmed" checked onchange="setCsvFile(this)">Confirmed</label>
+    <label><input type="checkbox" name="mode2" id="mode2" value="sumByProbable" onchange="setCsvFile(this)">Probable</label>
+    <label><input type="checkBox" name="mode3" id="mode3" value="sumBySuspected" onchange="setCsvFile(this)">Suspected</label>
+  </p><p align="center">
+    <label><input type="radio" checked name="mode" value="sumBySaves" onchange="setCsvFile(this)">Saves</label>
+    <label><input type="radio" name="mode" value="sumByDeaths" onchange="setCsvFile(this)">Deaths</label>
+  </p>
   </form>
-</head>
-<body>
+
 
 <script src="d3.min.js"></script>
 <script>
@@ -84,8 +90,28 @@ var treemap = d3.treemap()
     .size([width, height])
     .padding(1)
     .round(true);
+var sbc = true, sbp = false, sbs = false, sba = true, sbd = false ;
 
-d3.csv("ebola_percent.csv", type, function(error, data) {
+function setCsvFile(file){
+  var fnb = "ebolaOpt1Opt2Opt3Out.csv";
+  if("SUMBYCONFIRMED"==file.value.toUpperCase()) sbc = !sbc;
+  else if("SUMBYPROBABLE"==file.value.toUpperCase()) sbp = !sbp;
+  else if("SUMBYSUSPECTED"==file.value.toUpperCase()) sbs = !sbs;
+  else /*if("SUMBYSAVES"==file.value.toUpperCase()||"SUMBYDEATHS"==file.value.toUpperCase())*/ {sba = !sba; sbd = !sbd;}
+  if ( !sbc && !sbp && !sbs ){document.getElementById("mode1").checked = true; sbc = !sbc;}
+  if (sbc) fnb = fnb.replace("Opt1", "Confirmed");
+  if (sbp) fnb = fnb.replace("Opt2", "Probable");
+  if (sbs) fnb = fnb.replace("Opt3", "Suspected");
+  if (sba) fnb = fnb.replace("Out", "Saves");
+  else if (sbd) fnb = fnb.replace("Out", "Deaths");
+  fnb = fnb.replace("Opt1", "");
+  fnb = fnb.replace("Opt2", "");
+  fnb = fnb.replace("Opt3", "");
+  renderd3(fnb);
+}
+
+function renderd3(csvFile){
+d3.csv(csvFile, type, function(error, data) {
   if (error) throw error;
 
   var root = stratify(data)
@@ -112,7 +138,7 @@ d3.csv("ebola_percent.csv", type, function(error, data) {
       .attr("class", "node-value")
       .text(function(d) { return format(d.value); });
 });
-
+}
 function type(d) {
   d.value = +d.value;
   return d;
