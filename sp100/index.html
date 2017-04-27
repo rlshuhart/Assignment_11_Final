@@ -1,6 +1,42 @@
 <!DOCTYPE html>
-<style>
+<!--
+sources:
+https://bl.ocks.org/mbostock/4063582
+https://www.ishares.com/us/products/239723/
+By Andrew Clark, Ryan Shuhart and Ed Johnson
+-->
+<html>
+<head>
+<title>S&P 100 Tree Map</title>
+</head>
 
+<body>
+<h1>S&P 100 Tree Map of Equity Weighting and Price </h1>
+
+The S&P 100 Index is made up of the 100 largest US publicly traded companies.
+<p>
+The below interactive tree map is segmented by sector. At the bottom, one can
+interact to display box size by each component's weight in S&P 100 or by their
+recent share price.
+<p>
+<b>Sectors:</b>
+<ul>
+  <li>Consumer Discretionary</li>
+  <li>Consumer Staples</li>
+  <li>Energy</li>
+  <li>Financials</li>
+  <li>Health Care</li>
+  <li>Industrials</li>
+  <li>Information Technology</li>
+  <li>Materials</li>
+  <li>Real Estate</li>
+  <li>Telecommunications</li>
+  <li>Utilities</li>
+</ul>
+<p>
+<p>
+
+<style>
 form {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -68,7 +104,8 @@ d3.json("sp100.json", function(error, data) {
       .text(function(d) { return d; });
 
   cell.append("title")
-      .text(function(d) { console.log(d); return d.data.id +
+      .text(function(d) { return d.data.name +
+        "\nSector: " + d.parent.data.name +
         "\nWeight: " + parseFloat(d.data.size).toFixed(2) +"%" +
         "\nPrice: $" + parseFloat(d.data.price).toFixed(2)
       ; });
@@ -89,7 +126,7 @@ d3.json("sp100.json", function(error, data) {
     treemap(root.sum(sum));
 
     cell.transition()
-        .duration(750)
+        .duration(2000)
         .attr("transform", function(d) { return "translate(" + d.x0 + "," + d.y0 + ")"; })
       .select("rect")
         .attr("width", function(d) { return d.x1 - d.x0; })
@@ -106,3 +143,5 @@ function sumBySize(d) {
 }
 
 </script>
+</body>
+</html>
