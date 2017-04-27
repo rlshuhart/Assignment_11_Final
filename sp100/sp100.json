@@ -1,0 +1,167 @@
+{
+ "name": "SP100",
+ "children": [
+  {
+   "name": "Equity",
+   "children": [
+    {
+     "name": "Consumer_Discretionary",
+     "children": [
+        {"name": "AMAZON COM INC", "size": 2.8051, "price": 909.29},
+        {"name": "COMCAST A CORP", "size": 1.4121, "price": 38.775},
+        {"name": "F MOTOR", "size": 0.3515, "price": 11.6},
+        {"name": "GENERAL MOTORS", "size": 0.365, "price": 34.38},
+        {"name": "HOME DEPOT INC", "size": 1.4225, "price": 154.0013},
+        {"name": "LOWES COMPANIES INC", "size": 0.5664, "price": 85.23},
+        {"name": "MCDONALDS CORP", "size": 0.857, "price": 140.84},
+        {"name": "NIKE INC CLASS B", "size": 0.5869, "price": 55.53},
+        {"name": "STARBUCKS CORP", "size": 0.6875, "price": 61.655},
+        {"name": "TARGET CORP", "size": 0.2383, "price": 55.98},
+        {"name": "THE PRICELINE GROUP INC", "size": 0.6797, "price": 1804.12},
+        {"name": "TIME WARNER INC", "size": 0.608, "price": 100.21},
+        {"name": "TWENTY FIRST CENTURY FOX INC CLASS", "size": 0.257, "price": 30.775},
+        {"name": "TWENTY-FIRST CENTURY FOX INC CLASS", "size": 0.1174, "price": 30.05},
+        {"name": "WALT DISNEY", "size": 1.3112, "price": 115.58}
+     ]
+    },
+    {
+     "name": "Consumer_Staples",
+     "children": [
+        {"name": "ALTRIA GROUP INC", "size": 1.0874, "price": 71.51},
+        {"name": "COCA-COLA", "size": 1.3073, "price": 43.21},
+        {"name": "COLGATE-PALMOLIVE", "size": 0.5073, "price": 73.43},
+        {"name": "COSTCO WHOLESALE CORP", "size": 0.5864, "price": 176.8},
+        {"name": "CVS HEALTH CORP", "size": 0.6397, "price": 82.0},
+        {"name": "KRAFT HEINZ", "size": 0.431, "price": 90.92},
+        {"name": "MONDELEZ INTERNATIONAL INC CLASS A", "size": 0.5392, "price": 45.12},
+        {"name": "PEPSICO INC", "size": 1.2729, "price": 113.33},
+        {"name": "PHILIP MORRIS INTERNATIONAL INC", "size": 1.3397, "price": 111.15},
+        {"name": "PROCTER & GAMBLE", "size": 1.7931, "price": 87.74},
+        {"name": "WALGREEN BOOTS ALLIANCE INC", "size": 0.5634, "price": 85.92},
+        {"name": "WALMART STORES INC", "size": 0.8844, "price": 75.43}
+     ]
+    },
+    {
+     "name": "Energy",
+     "children": [
+        {"name": "CHEVRON CORP", "size": 1.5589, "price": 106.08},
+        {"name": "CONOCOPHILLIPS", "size": 0.4653, "price": 48.34},
+        {"name": "EXXON MOBIL CORP", "size": 2.6374, "price": 81.4},
+        {"name": "HALLIBURTON", "size": 0.3246, "price": 46.98},
+        {"name": "KINDER MORGAN INC", "size": 0.3123, "price": 21.115},
+        {"name": "OCCIDENTAL PETROLEUM CORP", "size": 0.3716, "price": 62.7345},
+        {"name": "SCHLUMBERGER NV", "size": 0.8375, "price": 74.11}
+     ]
+   },
+   {
+    "name": "Financials",
+    "children": [
+      {"name": "ALLSTATE CORP", "size": 0.2295, "price": 81.8},
+      {"name": "AMERICAN EXPRESS", "size": 0.4757, "price": 80.52},
+      {"name": "AMERICAN INTERNATIONAL GROUP INC", "size": 0.436, "price": 60.16},
+      {"name": "BANK OF AMERICA CORP", "size": 1.8159, "price": 23.89},
+      {"name": "BANK OF NEW YORK MELLON CORP", "size": 0.38, "price": 47.15},
+      {"name": "BERKSHIRE HATHAWAY INC CLASS B", "size": 2.4603, "price": 167.63},
+      {"name": "BLACKROCK INC", "size": 0.3646, "price": 389.37},
+      {"name": "CAPITAL ONE FINANCIAL CORP", "size": 0.316, "price": 83.06},
+      {"name": "CITIGROUP INC", "size": 1.2707, "price": 59.94},
+      {"name": "GOLDMAN SACHS GROUP INC", "size": 0.6344, "price": 226.2},
+      {"name": "JPMORGAN CHASE & CO", "size": 2.3993, "price": 88.43},
+      {"name": "METLIFE INC", "size": 0.442, "price": 51.957},
+      {"name": "MORGAN STANLEY", "size": 0.4795, "price": 44.603},
+      {"name": "US BANCORP", "size": 0.6337, "price": 52.12},
+      {"name": "WELLS FARGO", "size": 1.8916, "price": 54.32}
+    ]
+  },
+  {
+   "name": "Health_Care",
+   "children": [
+      {"name": "ABBOTT LABORATORIES", "size": 0.5967, "price": 43.8},
+      {"name": "ABBVIE INC", "size": 0.7982, "price": 65.46},
+      {"name": "ALLERGAN", "size": 0.6263, "price": 239.5},
+      {"name": "AMGEN INC", "size": 0.937, "price": 164.61},
+      {"name": "BIOGEN INC INC", "size": 0.4618, "price": 279.14},
+      {"name": "BRISTOL MYERS SQUIBB", "size": 0.7019, "price": 54.245},
+      {"name": "CELGENE CORP", "size": 0.753, "price": 123.3},
+      {"name": "DANAHER CORP", "size": 0.3971, "price": 82.98},
+      {"name": "ELI LILLY", "size": 0.6247, "price": 80.96},
+      {"name": "GILEAD SCIENCES INC", "size": 0.6825, "price": 68.22},
+      {"name": "JOHNSON & JOHNSON", "size": 2.5964, "price": 123.82},
+      {"name": "MEDTRONIC PLC", "size": 0.8708, "price": 82.14},
+      {"name": "MERCK & CO INC", "size": 1.3484, "price": 62.7},
+      {"name": "PFIZER INC", "size": 1.5768, "price": 33.85},
+      {"name": "UNITEDHEALTH GROUP INC", "size": 1.2956, "price": 174.38}
+   ]
+ },
+ {
+  "name": "Industrials",
+  "children": [
+      {"name": "3M", "size": 0.8949, "price": 195.0},
+      {"name": "BOEING", "size": 0.8019, "price": 181.71},
+      {"name": "CATERPILLAR INC", "size": 0.4359, "price": 104.66},
+      {"name": "EMERSON ELECTRIC", "size": 0.2997, "price": 61.315},
+      {"name": "FEDEX CORP", "size": 0.359, "price": 189.58},
+      {"name": "GENERAL DYNAMICS CORP", "size": 0.4203, "price": 194.85},
+      {"name": "GENERAL ELECTRIC", "size": 2.0736, "price": 29.26},
+      {"name": "HONEYWELL INTERNATIONAL INC", "size": 0.7398, "price": 130.1},
+      {"name": "LOCKHEED MARTIN CORP", "size": 0.5329, "price": 270.35},
+      {"name": "RAYTHEON", "size": 0.3541, "price": 155.27},
+      {"name": "UNION PACIFIC CORP", "size": 0.6894, "price": 110.17},
+      {"name": "UNITED PARCEL SERVICE INC CLASS B", "size": 0.5711, "price": 107.62},
+      {"name": "UNITED TECHNOLOGIES CORP", "size": 0.6705, "price": 118.83}
+  ]
+},
+{
+ "name": "Information_Technology",
+ "children": [
+    {"name": "ACCENTURE PLC CLASS A", "size": 0.5828, "price": 118.98},
+    {"name": "ALPHABET INC CLASS A", "size": 2.0066, "price": 889.14},
+    {"name": "ALPHABET INC CLASS C", "size": 1.9528, "price": 872.9},
+    {"name": "APPLE INC", "size": 5.8677, "price": 143.68},
+    {"name": "CISCO SYSTEMS INC", "size": 1.2909, "price": 33.4},
+    {"name": "FACEBOOK CLASS A INC", "size": 2.6592, "price": 146.56},
+    {"name": "INTEL CORPORATION CORP", "size": 1.3431, "price": 37.0799},
+    {"name": "INTERNATIONAL BUSINESS MACHINES CO", "size": 1.0938, "price": 160.06},
+    {"name": "MASTERCARD INC CLASS A", "size": 0.8477, "price": 116.17},
+    {"name": "MICROSOFT CORP", "size": 3.9741, "price": 67.83},
+    {"name": "ORACLE CORP", "size": 1.0479, "price": 44.69},
+    {"name": "PAYPAL HOLDINGS INC", "size": 0.3853, "price": 44.41},
+    {"name": "QUALCOMM INC", "size": 0.6107, "price": 53.04},
+    {"name": "TEXAS INSTRUMENT INC", "size": 0.6339, "price": 81.11},
+    {"name": "VISA INC CLASS A", "size": 1.3298, "price": 91.82}
+ ]
+},
+{
+ "name": "Materials",
+ "children": [
+    {"name": "DOW CHEMICAL", "size": 0.5429, "price": 64.33},
+    {"name": "E I DU PONT DE NEMOURS", "size": 0.5315, "price": 81.75},
+    {"name": "MONSANTO", "size": 0.3984, "price": 116.74}
+ ]
+},
+{
+ "name": "Real_Estate",
+ "children": [
+    {"name": "SIMON PROPERTY GROUP REIT INC", "size": 0.4388, "price": 165.04}
+ ]
+},
+{
+ "name": "Telecommunications",
+ "children": [
+    {"name": "AT&T INC", "size": 1.9462, "price": 40.44},
+    {"name": "VERIZON COMMUNICATIONS INC", "size": 1.5494, "price": 47.36}
+ ]
+},
+{
+ "name": "Utilities",
+ "children": [
+    {"name": "DUKE ENERGY CORP", "size": 0.4506, "price": 82.6},
+    {"name": "EXELON CORP", "size": 0.255, "price": 34.9},
+    {"name": "NEXTERA ENERGY INC", "size": 0.4804, "price": 132.83},
+    {"name": "SOUTHERN", "size": 0.3873, "price": 49.97}
+ ]
+}
+   ]
+  }
+ ]
+}
